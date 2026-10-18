@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundo Robótico — Plataforma de Aprendizagem</title>
+<style>
+:root{--bg:#0a1022;--panel:#121c35;--panel2:#172443;--text:#f3f6ff;--muted:#b7c3df;--blue:#55b8ff;--violet:#9d83ff;--green:#70e0b0;--line:#2b3b61}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1b2c57 0,#0a1022 42%);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:22px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#0a1022dd;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--violet));font-size:27px;box-shadow:0 0 30px #55b8ff33}h1{font-size:clamp(20px,3vw,30px);margin:0;line-height:1.2}.tag{color:var(--muted);font-size:13px;margin-top:4px}
+.layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:22px;max-width:1400px;margin:auto;padding:22px clamp(12px,3vw,36px)}
+aside,.panel{background:linear-gradient(150deg,#121c35,#10182e);border:1px solid var(--line);border-radius:20px}
+aside{padding:18px;height:max-content;position:sticky;top:100px;max-height:calc(100vh - 120px);overflow:auto}
+main{min-width:0}.hero{padding:clamp(22px,4vw,42px);border-radius:24px;background:linear-gradient(120deg,#17355a,#30235c);border:1px solid #45659c;margin-bottom:18px;position:relative;overflow:hidden}
+.hero:after{content:"🤖";position:absolute;right:5%;top:10%;font-size:clamp(60px,10vw,120px);opacity:.16}
+.eyebrow{color:#9edaff;text-transform:uppercase;font-weight:800;letter-spacing:1.7px;font-size:12px}.hero h2{font-size:clamp(27px,4vw,42px);line-height:1.13;margin:10px 0}.hero p{max-width:650px;color:#e0eaff;margin-bottom:20px}
+.progressline{height:10px;background:#253657;border-radius:99px;overflow:hidden}.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width .25s}
+.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin:8px 0 0}
+.navtitle{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:1.2px;margin:0 0 10px}.module-nav{display:flex;flex-direction:column;gap:7px}.module-btn{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;border-radius:12px;padding:10px;cursor:pointer;font:inherit}.module-btn:hover,.module-btn.active{background:#1b2a4c;border-color:#3b5c91}.num{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;border-radius:9px;background:#25375c;color:#9bd9ff;font-weight:800}.module-btn small{display:block;color:var(--muted);font-size:12px}
+.panel{padding:clamp(18px,3vw,30px);margin-bottom:18px}.content-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{display:inline-block;background:#203c5d;color:#bde6ff;border:1px solid #355a86;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800}.muted{color:var(--muted)}h2{line-height:1.2}h3{margin:22px 0 8px;font-size:20px}p{margin:8px 0 14px}ul,ol{padding-left:24px}.callout{border-left:4px solid var(--blue);background:#172945;padding:14px 16px;border-radius:0 12px 12px 0;margin:16px 0}.practice{background:#122b2b;border:1px solid #27665b;border-radius:14px;padding:16px;margin-top:16px}.practice strong{color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{padding:16px;border:1px solid var(--line);background:#101a31;border-radius:14px}.mini b{display:block;color:#c8e8ff;margin-bottom:5px}.btn{border:0;border-radius:12px;padding:11px 16px;background:linear-gradient(110deg,#239de5,#7962e9);color:white;font-weight:800;cursor:pointer;font:inherit}.btn.secondary{background:#233454;border:1px solid #3a507b}.btn:disabled{opacity:.4;cursor:not-allowed}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.quiz-option{display:block;width:100%;text-align:left;padding:13px 15px;margin:8px 0;border-radius:12px;background:#111b32;color:var(--text);border:1px solid var(--line);cursor:pointer;font:inherit}.quiz-option:hover{border-color:var(--blue)}.quiz-option.chosen{border-color:var(--blue);background:#183554}.feedback{padding:13px;border-radius:12px;margin-top:12px}.correct{background:#12352e;border:1px solid #2e8c6f}.wrong{background:#3a202c;border:1px solid #9c4b69}.hidden{display:none!important}.certificate{border:2px dashed #5575b7;border-radius:18px;padding:clamp(18px,4vw,34px);text-align:center;background:radial-gradient(circle at top,#203b69,#10182e)}.certificate .cert-icon{font-size:42px}.certificate h2{font-family:Georgia,serif;letter-spacing:1px;color:#c9e8ff}.certificate input{width:100%;max-width:460px;padding:12px;border-radius:10px;border:1px solid #46618e;background:#0d162b;color:var(--text);font:inherit;margin:8px 0 12px}.cert-status{margin:12px auto;max-width:620px;color:var(--muted)}.lessonlist{display:grid;gap:9px}.lessonrow{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#101a31}.check{accent-color:#55b8ff;width:18px;height:18px;margin-top:4px}.lessonrow label{cursor:pointer;flex:1}.lessonrow small{display:block;color:var(--muted)}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:13px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{position:static;max-height:none}.module-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.hero:after{right:2%;top:20%}}
+@media print{body{background:white;color:#111}header,aside,.hero,main>section:not(#certificatePanel),footer,.no-print{display:none!important}.layout{display:block;padding:0;max-width:none}main{display:block}#certificatePanel{display:block!important;background:white!important;color:#111!important;border:0!important;margin:0!important;padding:0!important}.certificate{background:white!important;color:#111!important;border:5px double #253d70!important;border-radius:0!important;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center}.certificate h2{color:#253d70!important}.certificate p,.certificate .cert-status{color:#222!important}.certificate input{display:none!important}#certificateNameText{display:block!important;font-size:30px;font-weight:bold;border-bottom:1px solid #333;padding:8px 30px;margin:20px 0}#certificateActions{display:none!important}}
+@media(max-width:560px){.module-nav,.grid{grid-template-columns:1fr}.layout{padding:12px}.hero{padding:22px}.hero:after{font-size:55px;right:10px;top:10px}.content-head h2{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">🤖</div><div><h1>Mundo Robótico</h1><div class="tag">Aprenda. Pratique. Crie. · Curso do zero ao projeto</div></div></div></header>
+<div class="layout">
+<aside>
+ <p class="navtitle">SEU CAMINHO</p>
+ <div class="progressline"><div class="progressfill" id="sideFill"></div></div>
+ <div class="progressrow"><span>Progresso do curso</span><b id="sidePct">0%</b></div>
+ <div style="height:18px"></div>
+ <div class="module-nav" id="moduleNav"></div>
+ <div class="callout" style="font-size:13px"><b>Dica de estudo</b><br>Leia uma parte, explique com suas próprias palavras e só então responda ao desafio. Você pode voltar às aulas quando quiser.</div>
+ <button class="btn secondary" id="resetBtn" style="width:100%">Reiniciar progresso</button>
+</aside>
+<main>
+ <section class="hero">
+  <div class="eyebrow">Sua jornada começa aqui</div>
+  <h2>Do primeiro conceito<br>ao seu próprio projeto.</h2>
+  <p>Aprenda robótica passo a passo com explicações simples, exemplos, exercícios e projetos. Não precisa comprar peças para começar: primeiro vamos aprender a pensar como quem projeta robôs.</p>
+  <div class="progressline"><div class="progressfill" id="heroFill"></div></div>
+  <div class="progressrow"><span id="heroProgress">0 de 8 módulos concluídos</span><span id="heroPercent">0%</span></div>
+ </section>
+ <section class="panel" id="lessonPanel"></section>
+ <section class="panel" id="quizPanel"></section>
+ <section class="panel">
+  <h2>🧪 Laboratório de ideias</h2>
+  <p class="muted">Use este roteiro sempre que imaginar um robô novo.</p>
+  <div class="grid">
+   <div class="mini"><b>1. Problema</b>Que tarefa precisa ser resolvida? Quem precisa dessa solução?</div>
+   <div class="mini"><b>2. Ambiente</b>Onde o robô vai funcionar? Há obstáculos, poeira, água ou pessoas por perto?</div>
+   <div class="mini"><b>3. Componentes</b>Quais partes mecânicas, sensores, controlador e motores podem ajudar?</div>
+   <div class="mini"><b>4. Teste e melhoria</b>Como saberemos se funciona? Que dados vamos observar e o que pode ser melhorado?</div>
+  </div>
+ </section>
+ <section class="panel">
+  <h2>🚀 Projeto final do curso</h2>
+  <p>Seu projeto será o planejamento de uma primeira versão educativa do <b>Mundo Robótico</b>, junto de um protótipo ou simulação simples de robô. Você organizará aulas, atividades, desafios e uma forma de acompanhar o progresso dos alunos.</p>
+  <div class="lessonlist">
+   <div class="lessonrow"><input class="check project-check" type="checkbox" data-project="p1"><label>Definir o problema que o projeto resolve</label></div>
+   <div class="lessonrow"><input class="check project-check" type="checkbox" data-project="p2"><label>Desenhar o robô e identificar seus componentes</label></div>
+   <div class="lessonrow"><input class="check project-check" type="checkbox" data-project="p3"><label>Planejar a lógica com pseudocódigo ou fluxograma</label></div>
+   <div class="lessonrow"><input class="check project-check" type="checkbox" data-project="p4"><label>Testar uma simulação ou protótipo de baixa tensão</label></div>
+   <div class="lessonrow"><input class="check project-check" type="checkbox" data-project="p5"><label>Montar as aulas e testar o aplicativo com colegas e um professor</label></div>
+  </div>
+ </section>
+ <section class="panel" id="certificatePanel">
+  <div class="certificate">
+   <div class="cert-icon">🏆</div>
+   <span class="pill">CONQUISTA FINAL</span>
+   <h2>Certificado de Conclusão</h2>
+   <p>Este certificado será liberado quando você concluir os 8 módulos, marcar as atividades práticas e acertar os desafios de cada módulo.</p>
+   <div class="no-print"><label for="studentName"><b>Nome para o certificado</b></label><br><input id="studentName" type="text" maxlength="90" placeholder="Digite seu nome completo"></div>
+   <div id="certificateNameText" style="display:none"></div>
+   <p>concluiu o curso introdutório</p>
+   <h2 style="font-size:clamp(22px,4vw,32px)">Mundo Robótico</h2>
+   <p>Fundamentos, eletrônica, mecânica, sensores, controladores, programação e projetos.</p>
+   <div class="cert-status" id="certificateStatus">Seu progresso aparecerá aqui. Continue estudando para desbloquear o certificado.</div>
+   <div id="certificateActions" class="actions" style="justify-content:center"><button class="btn" id="generateCertificate">Gerar certificado para impressão</button></div>
+   <p style="font-size:12px;margin-top:24px">Certificado de conclusão gerado pela plataforma educativa Mundo Robótico. Não representa diploma ou certificação oficial reconhecida por instituição de ensino.</p>
+  </div>
+ </section>
+</main>
+</div>
+<footer>Mundo Robótico · Plataforma educativa independente · Seu progresso fica salvo neste navegador, neste dispositivo.</footer>
+<script>
+const modules = [
+{title:"Fundamentos da Robótica",time:"Aulas 1–3 · Comece aqui",goal:"Entender o que é robótica, o que diferencia um robô de outras máquinas e como os sistemas trabalham juntos.",
+lessons:[
+["Aula 1 — O que é robótica?","Robótica é uma área que combina mecânica, eletrônica, programação e controle para projetar, construir e operar robôs. Um robô é uma máquina programável que executa tarefas. Muitos robôs usam sensores para perceber o ambiente e ajustar suas ações; nem todos têm a mesma autonomia.","Exemplo: um robô aspirador pode detectar obstáculos, decidir mudar de direção e acionar os motores para continuar limpando."],
+["Aula 2 — Robô, máquina ou automação?","Uma máquina ajuda a realizar trabalho. Automação é usar sistemas para executar tarefas com menos intervenção humana. Um robô costuma combinar mecanismos controlados por um programa e pode interagir com o ambiente. Nem toda máquina automática é um robô.","Exemplo: um ventilador com uma única velocidade é uma máquina; um braço programável que pega peças é um robô industrial."],
+["Aula 3 — Partes de um sistema robótico","Pense em cinco partes: estrutura mecânica, alimentação elétrica, controlador, sensores e atuadores. O programa contém as instruções. Em um robô simples, essas partes precisam trabalhar juntas.","Exemplo: o sensor mede a distância; o controlador interpreta a medida; o programa decide; os motores executam o movimento."]
+],practice:"Desenhe um robô que ajude em uma tarefa da escola ou da sua casa. Identifique a estrutura, a fonte de energia, o controlador, pelo menos um sensor e um atuador.",
+quiz:{q:"Qual alternativa descreve melhor a robótica?",opts:["Apenas montar peças de metal.","Combinar áreas como mecânica, eletrônica e programação para criar sistemas robóticos.","Somente escrever código no computador."],a:1,why:"A robótica é interdisciplinar: combina componentes físicos e programação para realizar tarefas."}},
+{title:"Eletrônica Básica",time:"Aulas 4–6",goal:"Compreender os conceitos elétricos essenciais e a função de componentes simples.",
+lessons:[
+["Aula 4 — Energia, tensão e corrente","Energia é a capacidade de realizar trabalho. Tensão elétrica é a diferença de potencial que impulsiona cargas; corrente é o fluxo de carga elétrica. A resistência dificulta a passagem da corrente. São conceitos diferentes, embora relacionados.","Analogia: água em um cano ajuda a imaginar a tensão como pressão e a corrente como fluxo. A analogia não explica todos os detalhes elétricos, mas ajuda no começo."],
+["Aula 5 — Circuitos e componentes","Um circuito precisa de um caminho condutor fechado para a corrente circular. Pilhas e baterias fornecem energia; fios conectam; resistores limitam corrente; LEDs emitem luz quando conectados corretamente.","Um LED precisa de limitação de corrente, geralmente com resistor adequado. A polaridade também importa."],
+["Aula 6 — Segurança elétrica","Para aprender, comece com simuladores ou kits educativos de baixa tensão. Nunca experimente com tomadas, rede elétrica doméstica, baterias danificadas ou fios expostos. Desconecte a alimentação antes de alterar um circuito e peça supervisão de um adulto ou professor.","Use o Tinkercad Circuits para simular circuitos antes de montar qualquer coisa física."]
+],practice:"No papel ou no simulador, desenhe uma bateria, fios, um resistor e um LED formando um circuito fechado. Explique o papel de cada peça. Não use tomadas ou rede elétrica.",
+quiz:{q:"Qual é a função comum de um resistor em um circuito com LED?",opts:["Armazenar todas as informações do robô.","Ajudar a limitar a corrente que passa pelo LED.","Fazer o LED funcionar sem fonte de energia."],a:1,why:"O resistor pode limitar a corrente e ajudar a proteger o LED. Seu valor depende da tensão e dos componentes."}},
+{title:"Mecânica e Movimento",time:"Aulas 7–9",goal:"Descobrir como estruturas, rodas, eixos e engrenagens transmitem movimento.",
+lessons:[
+["Aula 7 — Estrutura e estabilidade","A estrutura sustenta as peças. Uma boa estrutura precisa suportar as cargas previstas e manter os componentes presos. O centro de massa e a distribuição do peso influenciam a estabilidade.","Um robô alto e estreito pode tombar mais facilmente ao virar do que um robô baixo e largo."],
+["Aula 8 — Rodas, eixos e engrenagens","Rodas ajudam no deslocamento; eixos transmitem rotação; engrenagens transferem movimento entre peças. A relação entre engrenagens pode trocar velocidade por torque, conforme o projeto.","Engrenagens maiores e menores alteram a velocidade e a força de rotação disponível. O resultado depende de como elas estão conectadas."],
+["Aula 9 — Força, atrito e movimento","Força pode mudar a velocidade ou a direção de um objeto. O atrito pode ajudar uma roda a ter aderência, mas também dificulta alguns movimentos. O peso, o terreno e a potência disponível afetam o deslocamento.","Antes de escolher motores, pense no peso do robô, no tipo de piso e no que ele precisa carregar."]
+],practice:"Desenhe um robô de duas rodas. Marque o chassi, as rodas, os eixos e a posição aproximada da bateria. Por que a bateria deve ficar bem presa?",
+quiz:{q:"Para que servem as engrenagens em um mecanismo?",opts:["Somente para enfeitar o robô.","Para transmitir movimento e modificar a relação entre velocidade e torque.","Para substituir qualquer tipo de programação."],a:1,why:"Engrenagens transmitem rotação e podem alterar a relação entre velocidade e torque."}},
+{title:"Sensores e Percepção",time:"Aulas 10–12",goal:"Entender como um robô coleta informações do ambiente.",
+lessons:[
+["Aula 10 — O que é um sensor?","Sensor é um componente que mede ou detecta uma condição física e gera um sinal que um sistema pode interpretar. O sensor não toma necessariamente a decisão: normalmente o controlador e o programa usam a informação.","Um sensor de luz pode indicar se o ambiente está claro ou escuro."],
+["Aula 11 — Tipos de sensores","Sensores de distância estimam o afastamento de objetos; sensores de luz medem iluminação; sensores de temperatura medem temperatura; sensores de toque detectam contato. Cada tipo serve a certas condições e tem limitações.","Um sensor de distância pode falhar em certas superfícies ou ângulos. Projetos reais precisam considerar erros de medição."],
+["Aula 12 — Da medição à decisão","O controlador lê o valor do sensor e o programa compara esse valor com uma condição. Por exemplo: se a distância for menor que um limite, parar; caso contrário, continuar. O limite precisa ser testado e ajustado.","Medições podem variar. Em sistemas mais avançados, o programa pode filtrar várias leituras antes de decidir."]
+],practice:"Escreva uma regra para um robô que se aproxima de uma parede: 'Se ______, então ______; caso contrário, ______.'",
+quiz:{q:"Qual componente ajuda um robô a detectar um obstáculo?",opts:["Um sensor apropriado, como um sensor de distância.","Uma roda sem nenhum sensor ou informação.","Somente a carcaça do robô."],a:0,why:"Um sensor de distância pode fornecer informação sobre objetos próximos para o programa usar."}},
+{title:"Controladores e Motores",time:"Aulas 13–15",goal:"Aprender como o programa se comunica com os componentes físicos.",
+lessons:[
+["Aula 13 — O controlador","O controlador é o sistema eletrônico que executa instruções e recebe ou envia sinais. Placas educativas, como Arduino, podem ler sensores e comandar saídas. O controlador não é o mesmo que o sensor ou o motor.","Pense nele como o coordenador: recebe dados, executa a lógica e envia comandos."],
+["Aula 14 — Motores e atuadores","Atuadores transformam um comando em ação física. Motores DC costumam girar continuamente; servomotores permitem controlar uma posição ou movimento dentro de uma faixa; outros atuadores têm funções específicas.","A escolha depende da tarefa, da carga, da velocidade e do tipo de controle necessário."],
+["Aula 15 — Entradas e saídas","Entradas são informações recebidas, como leituras de sensores. Saídas são comandos enviados, como acender um LED ou comandar um motor por um circuito apropriado. A placa pode ter limites de corrente e tensão.","Motores frequentemente precisam de um driver apropriado; não conecte motores diretamente a um pino de controlador sem verificar as especificações."]
+],practice:"Faça um diagrama com setas: sensor → controlador com programa → driver/atuador → movimento. Explique o que acontece em cada etapa.",
+quiz:{q:"Qual é a função principal do controlador?",opts:["Ser apenas a estrutura física do robô.","Executar instruções e coordenar entradas e saídas.","Gerar movimento sem componentes conectados."],a:1,why:"O controlador executa o programa e coordena a leitura de entradas e o comando de saídas."}},
+{title:"Programação para Robótica",time:"Aulas 16–19",goal:"Criar instruções claras para que um sistema execute tarefas.",
+lessons:[
+["Aula 16 — Algoritmos","Algoritmo é uma sequência organizada de passos para resolver um problema. Antes de programar, escreva o que deve acontecer, em que ordem e o que fazer quando surgir uma situação diferente.","Exemplo: iniciar → ler sensor → comparar distância → decidir movimento → repetir."],
+["Aula 17 — Sequência e condições","Uma sequência define a ordem das ações. Uma condição permite escolher entre caminhos diferentes, como 'se estiver escuro, acenda a luz; senão, mantenha apagada'.","Condições comuns usam 'se', 'senão', maior que, menor que ou igual a."],
+["Aula 18 — Repetições e variáveis","Uma repetição executa um conjunto de instruções várias vezes. Uma variável guarda um valor que pode mudar, como a leitura de distância ou o número de tentativas.","Um laço pode repetir a leitura do sensor enquanto o robô estiver ligado."],
+["Aula 19 — Pseudocódigo e fluxograma","Pseudocódigo descreve a lógica em linguagem simples, sem exigir uma linguagem de programação específica. Fluxogramas representam passos e decisões com formas e setas.","Esboce primeiro a lógica; depois implemente em blocos ou código."]
+],practice:"Escreva um pseudocódigo de três passos para um robô: ler distância, parar se houver obstáculo perto, seguir em frente se o caminho estiver livre.",
+quiz:{q:"O que uma condição 'se... então... senão' permite fazer?",opts:["Escolher ações diferentes conforme uma situação.","Aumentar fisicamente o tamanho do robô.","Substituir todos os sensores."],a:0,why:"Uma condição permite que o programa escolha um caminho conforme o resultado de um teste."}},
+{title:"Projetos e Desafios",time:"Aulas 20–22",goal:"Juntar o que aprendeu para planejar, testar e melhorar uma solução.",
+lessons:[
+["Aula 20 — Definir o problema","Um bom projeto começa com uma necessidade concreta. Defina quem tem o problema, em que ambiente ele ocorre e como você medirá o sucesso. Evite começar escolhendo peças sem saber a tarefa.","Exemplo: um robô escolar que avisa quando se aproxima de um obstáculo em uma pista de demonstração."],
+["Aula 21 — Prototipagem e testes","Um protótipo é uma primeira versão usada para testar uma ideia. Comece simples, teste uma função por vez e anote o que aconteceu. Compare os resultados com o objetivo inicial.","Registre: o que esperava, o que aconteceu, qual pode ser a causa e qual será a próxima mudança."],
+["Aula 22 — Erros e melhorias","Falhas são informações úteis. Verifique as conexões, a alimentação, a lógica, as medidas do sensor e o movimento mecânico de forma organizada. Mude uma variável por vez quando possível.","Nunca altere circuitos energizados de forma insegura; desconecte a alimentação e peça orientação quando necessário."]
+],practice:"Crie uma ficha de projeto: problema, usuário, ambiente, componentes previstos, desenho, lógica, três testes e uma melhoria planejada.",
+quiz:{q:"Por que testar um protótipo?",opts:["Para provar que a primeira versão nunca precisa mudar.","Para observar o funcionamento, encontrar problemas e melhorar a solução.","Para evitar planejar o objetivo."],a:1,why:"Testes mostram se a solução atende ao objetivo e ajudam a orientar melhorias."}},
+{title:"Crie a Plataforma Mundo Robótico",time:"Projeto de conclusão",goal:"Organizar o conhecimento em uma experiência educativa simples e útil para iniciantes.",
+lessons:[
+["Aula 23 — Pensar no aluno","Defina quem vai usar a plataforma, o que a pessoa precisa aprender e como a aula pode ser acessível. Use linguagem simples, exemplos, atividades curtas e feedback respeitoso.","Comece com um público inicial claro, como estudantes que nunca estudaram robótica."],
+["Aula 24 — Organizar as telas","Planeje páginas como Início, Módulos, Aula, Desafio e Progresso. Cada tela deve ter um propósito claro e botões fáceis de entender. O conteúdo pode começar em texto e imagens simples.","Faça um esboço em papel antes de montar a interface no MIT App Inventor."],
+["Aula 25 — Testar com pessoas","Peça a colegas e a um professor que testem a plataforma. Observe se conseguem encontrar uma aula, entender uma explicação e responder a um desafio. Colete sugestões sem pedir dados pessoais desnecessários.","Uma primeira versão não precisa ter todas as funções. Ela precisa ensinar algo bem e permitir melhorias."]
+],practice:"Desenhe cinco telas do Mundo Robótico e escreva o que o aluno fará em cada uma. Depois, escolha uma aula para transformar em uma tela funcional no MIT App Inventor.",
+quiz:{q:"Qual é uma boa primeira versão da plataforma?",opts:["Uma plataforma enorme, com muitas funções não testadas.","Uma versão simples que ensina um conteúdo, oferece uma atividade e recebe feedback.","Uma tela bonita sem conteúdo de aprendizagem."],a:1,why:"Uma versão inicial simples permite testar o valor educativo e melhorar com base no uso real."}}
+];
+let current=0;
+const STORAGE="mundoRoboticoProgressV1";
+let state={completed:{},quizPassed:{},project:{}};
+try{state={...state,...JSON.parse(localStorage.getItem(STORAGE)||"{}")}}catch(e){}
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){} updateProgress()}
+function moduleDone(i){return !!state.completed[i]&&!!state.quizPassed[i]}
+function totalDone(){return modules.filter((m,i)=>moduleDone(i)).length}
+function updateProgress(){let pct=Math.round(totalDone()/modules.length*100);["sideFill","heroFill"].forEach(id=>document.getElementById(id).style.width=pct+"%");document.getElementById("sidePct").textContent=pct+"%";document.getElementById("heroPercent").textContent=pct+"%";document.getElementById("heroProgress").textContent=totalDone()+" de "+modules.length+" módulos concluídos";let status=document.getElementById("certificateStatus");if(status){status.textContent=totalDone()===modules.length?"Parabéns! Você concluiu os 8 módulos. Digite seu nome e gere o certificado.":"Progresso: "+totalDone()+" de "+modules.length+" módulos concluídos. Para liberar o certificado, conclua a atividade prática e o desafio de cada módulo.";document.getElementById("generateCertificate").disabled=totalDone()!==modules.length;}renderNav()}
+function renderNav(){const nav=document.getElementById("moduleNav");nav.innerHTML="";modules.forEach((m,i)=>{let b=document.createElement("button");b.className="module-btn"+(i===current?" active":"");b.innerHTML=`<span class="num">${moduleDone(i)?"✓":i+1}</span><span>${m.title}<small>${moduleDone(i)?"Concluído":m.time}</small></span>`;b.onclick=()=>{current=i;renderAll();window.scrollTo({top:0,behavior:"smooth"})};nav.appendChild(b)})}
+function renderLesson(){let m=modules[current],p=document.getElementById("lessonPanel");let html=`<div class="content-head"><div><span class="pill">MÓDULO ${current+1} DE ${modules.length}</span><h2>${m.title}</h2><p class="muted">${m.goal}</p></div><span class="pill">${m.time}</span></div><h3>📘 Conteúdo da aula</h3>`;
+m.lessons.forEach((l,i)=>{html+=`<div class="mini" style="margin:12px 0"><b>${l[0]}</b><p>${l[1]}</p><div class="callout"><b>Exemplo:</b> ${l[2]}</div></div>`});
+html+=`<div class="practice"><strong>🛠️ Prática do módulo</strong><p>${m.practice}</p><label><input class="check" type="checkbox" id="practiceCheck" ${state.completed[current]?"checked":""}> Marque quando terminar a atividade prática ou registrar sua tentativa.</label></div><div class="actions"><button class="btn" id="saveLesson">Salvar aula como estudada</button>${current>0?'<button class="btn secondary" id="prevBtn">← Módulo anterior</button>':''}${current<modules.length-1?'<button class="btn secondary" id="nextBtn">Próximo módulo →</button>':''}</div>`;
+p.innerHTML=html;document.getElementById("saveLesson").onclick=()=>{state.completed[current]=document.getElementById("practiceCheck").checked;save();renderAll();if(!state.completed[current])alert("Marque a atividade prática quando terminar ou registrar sua tentativa.");else alert("Progresso salvo! Agora responda ao desafio do módulo.")};if(current>0)document.getElementById("prevBtn").onclick=()=>{current--;renderAll();window.scrollTo({top:0,behavior:"smooth"})};if(current<modules.length-1)document.getElementById("nextBtn").onclick=()=>{current++;renderAll();window.scrollTo({top:0,behavior:"smooth"})}
+}
+function renderQuiz(){let m=modules[current],q=m.quiz,p=document.getElementById("quizPanel");p.innerHTML=`<span class="pill">DESAFIO DO MÓDULO ${current+1}</span><h2>🧠 Confira o que aprendeu</h2><p>${q.q}</p><div id="options"></div><div id="feedback" class="hidden"></div><div class="actions"><button class="btn" id="checkAnswer">Conferir resposta</button><button class="btn secondary" id="retryQuiz">Tentar novamente</button></div><p class="muted" style="font-size:13px">Dica: escolha uma alternativa e confira a explicação. Você pode tentar novamente quantas vezes precisar.</p>`;
+let selected=null,answered=false;const opts=document.getElementById("options");q.opts.forEach((o,i)=>{let b=document.createElement("button");b.className="quiz-option";b.textContent=String.fromCharCode(65+i)+") "+o;b.onclick=()=>{selected=i;[...opts.children].forEach(x=>x.classList.remove("chosen"));b.classList.add("chosen")};opts.appendChild(b)});const fb=document.getElementById("feedback");document.getElementById("checkAnswer").onclick=()=>{if(selected===null){fb.className="feedback wrong";fb.textContent="Escolha uma alternativa antes de conferir.";return}answered=true;let ok=selected===q.a;fb.className="feedback "+(ok?"correct":"wrong");fb.textContent=(ok?"Muito bem! Resposta correta. ":"Ainda não. Revise a explicação e tente de novo. ")+q.why;if(ok){state.quizPassed[current]=true;save();renderNav()}};document.getElementById("retryQuiz").onclick=()=>renderQuiz()}
+function renderAll(){renderNav();renderLesson();renderQuiz();updateProgress()}
+document.getElementById("resetBtn").onclick=()=>{if(confirm("Tem certeza de que deseja apagar o progresso salvo neste navegador?")){state={completed:{},quizPassed:{},project:{}};save();document.querySelectorAll(".project-check").forEach(c=>c.checked=false);renderAll()}};
+document.querySelectorAll(".project-check").forEach(c=>{c.checked=!!state.project[c.dataset.project];c.addEventListener("change",()=>{state.project[c.dataset.project]=c.checked;save()})});
+document.getElementById("generateCertificate").addEventListener("click",()=>{if(totalDone()!==modules.length){alert("Conclua todos os módulos antes de gerar o certificado.");return}const name=document.getElementById("studentName").value.trim();if(!name){alert("Digite seu nome completo para o certificado.");document.getElementById("studentName").focus();return}document.getElementById("certificateNameText").textContent=name;document.getElementById("certificateNameText").style.display="block";window.print()});
+renderAll();
+</script>
+</body>
+</html>
